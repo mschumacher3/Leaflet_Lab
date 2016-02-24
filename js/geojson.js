@@ -13,9 +13,9 @@ function createMap(){
     //adds tile layer and is linked with my syle tiles on MapBox
 	//{z} represents the zoom level; {x} is the horizontal coordinate; {y} is the vertical coordinate; 
 	//{s} represents the server instance from which the tiles are drawn
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    	//discribes the data layer
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+    L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+    maxZoom: 16
     }).addTo(map);
 
     //calls getData function
@@ -25,7 +25,7 @@ function createMap(){
 //function to retrieve the data and place it on the map
 function getData(map){
     //loads the data
-    $.ajax("data/MegaCities.geojson", {
+    $.ajax("data/NationalPark.geojson", {
         dataType: "json",
         success: function(response){
             //this creates marker icons
