@@ -68,7 +68,7 @@ function createPropSymbols(data, map){
     };*/
 
     //4. Determine which attribute to visualize with proportional symbols
-    var attribute = "2014";
+    var attribute = "2013";
 
     L.geoJson(data, {
         pointToLayer: function (feature, latlng){
@@ -102,11 +102,11 @@ function pointToLayer(feature, latlng){
 
     //create marker options
     var options = {
-        fillColor: "#ffb31a",
+        fillColor: "#ffffff",
         color: "#331a00",
         weight: 1,
         opacity: 1,
-        fillOpacity: 0.1
+        fillOpacity: 0.0
     };
 
     //For each feature, determine its value for the selected attribute
@@ -114,7 +114,10 @@ function pointToLayer(feature, latlng){
 
     //Give each feature's circle marker a radius based on its attribute value
     options.radius = calcPropRadius(attValue);
-
+     //creates marker layer...Example 2.1 line 21
+    var layer = L.marker(latlng, {
+        title: feature.properties.City
+    });
     //creates circle layer witht the marker
     var layer = L.circleMarker(latlng, options);
 
@@ -128,10 +131,25 @@ function pointToLayer(feature, latlng){
     //popup content that is now just the Park name
     var popupContent = feature.properties.Park;
 
+
     //bind the popup to the circle marker.. not sure how this works
     layer.bindPopup(popupContent, {
         offset: new L.Point(0,-options.radius),
         closeButton: false
+    });
+    //event listeners to open popup on hover
+    layer.on({
+        //when mouse is over prop symbol popup comes up
+        mouseover: function(){
+            this.openPopup();
+        },
+        //when mouse moves away from prop symbol, popup come off
+        mouseout: function(){
+            this.closePopup();
+        },
+        click: function(){
+            $("#panel").html(popupContent);
+        }
     });
 
 
@@ -140,6 +158,45 @@ function pointToLayer(feature, latlng){
 };
 
 
+
+
+/*
+
+
+//Step 1: Create new sequence controls
+function createSequenceControls(map){
+    //create range input element (slider)
+    $('#panel').append('<input class="range-slider" type="range">');
+};
+  //Example 3.3 line 1...create range input element (slider)
+    $('#panel').append('<input class="range-slider" type="range">');
+
+    //set slider attributes
+    $('.range-slider').attr({
+        max: 6,
+        min: 0,
+        value: 0,
+        step: 1
+    });
+   //below Example 3.4...add skip buttons
+    $('#panel').append('<button class="skip" id="reverse">Reverse</button>');
+    $('#panel').append('<button class="skip" id="forward">Skip</button>');
+
+//Import GeoJSON data
+function getData(map){
+    //load the data
+    $.ajax("data/NationalPark.geojson", {
+        dataType: "json",
+        success: function(response){
+
+            createPropSymbols(response, map);
+            createSequenceControls(map);
+
+        }
+    });
+};
+
+*/
 $(document).ready(createMap);
 
 
