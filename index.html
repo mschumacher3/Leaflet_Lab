@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
             <title>National Parks Visitor </title>
@@ -14,17 +15,12 @@
 
     <body font-family: arial>
         <!--linking my div-->
+        <div id="description" style="font-family: Avant Garde; font-size: 30px;color: #fff"> National Park Visitors 2009-2015</div>
          <div id="map"></div>
          <div id="panel"></div>
-        <!-- Denotes the 'mega cities' of the World with populations of more than population of 20 million in 2015.-->
-
-        <!--linked javascript to main and jQuery and main javascript here-->
+         <div id="control" style="font-family: Avant Garde"> <button onclick="togglePoints();">Show Averages for Parks</button> </div>
         <script type="text/javascript" src="lib/jquery-2.2.0.js"></script>
-        <script type="text/javascript" src="js/leaflet/leaflet.js"></script>
-        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-        <!--<script type="text/javascript" src="js/test.js"></script>-->
+        <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <!--<script type="text/javascript" src="js/geojson.js"></script>
-        <script type="text/javascript" src="js/tutorials.js"></script>-->
     </body>
 </html>
