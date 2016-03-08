@@ -1,6 +1,6 @@
 
 body{
-    background-color:#ecd9c6;
+    background-color:#F6F0DF;
 }
 
 .leaflet-popup-content p {
@@ -43,6 +43,8 @@ body{
 
 #forward {
     float: right;
+    padding: 2px;
+    opacity: 1;
 }
 
 #reverse {
@@ -51,5 +53,24 @@ body{
 #description{
     text-align: center;
     padding: 15px;
-    background-color: #003300;
+    background-color: #5A712D;
 }
+#buttonOverlay{
+  width: 200px;
+  position: relative;
+  padding: 3px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  background-color: #5A712D;
+  opacity: 0.6;
+  border-radius: 5px;
+  padding-bottom: 3px;
+}
+#buttonOverlay:hover {
+    background-color: #000000;
+}
+
+
+

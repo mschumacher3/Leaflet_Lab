@@ -1,12 +1,15 @@
 
 //1. Create the Leaflet map--done (in createMap())
 function createMap(){
+    //creates boundaries for map
+    //var bounds= [[22,-128],[55,-60]]
     //creates the map
     var map = L.map('map', {
     //sets the starting center of the map
       center: [50, -99],
       zoom: 3,
       minZoom:3,
+     // maxBounds: bounds
       });
 
     //add OSM base tilelayer
@@ -19,7 +22,7 @@ function createMap(){
     getData(map);
 };
 
-//calculate the radius of each proportional symbol
+//calculate the radius of each proportional symbols
 function calcPropRadius(attValue) {
     //scale factor to adjust symbol size evenly
     var scaleFactor = .0006;
@@ -41,7 +44,7 @@ function getData(map){
             var attributes = processData(response);
             //call function to create proportional symbols, then sequence controls
            createPropSymbols(response, map, attributes);
-            createSequenceControls(map, attributes);
+           createSequenceControls(map, attributes);
         }
 
     });
@@ -70,8 +73,7 @@ function processData(data){
 
 //Add circle markers for point features to the map
 //tried adding attributes
-function createPropSymbols(data, map){
-
+function createPropSymbols(data, map, attributes){
     //create a Leaflet GeoJSON layer and add it to the map
     L.geoJson(data, {
          pointToLayer: function(feature, latlng){
@@ -84,7 +86,7 @@ function pointToLayer(feature, latlng, attributes){
      //Step 4: Assign the current attribute based on the first index of the attributes array
     var attribute = attributes[0];
     //check
-    console.log(attribute);
+    //console.log(attribute);
     //create marker options
     var options = {
         fillColor: "#ffffff",
@@ -113,7 +115,7 @@ function pointToLayer(feature, latlng, attributes){
 
     //bind the popup to the circle marker
     layer.bindPopup(popupContent, {
-        offset: new L.point(0,-options.radius),
+        offset: new L.Point(0,-options.radius),
         closeButton: false
       });
     
@@ -127,54 +129,59 @@ function pointToLayer(feature, latlng, attributes){
         mouseout: function(){
             this.closePopup();
         },
-        click: function(){
-            $("#panel").html(popupContent);
-        }
+        // click: function(){
+        //  $("#panel").html(popupContent);
+        // }
     });
     //return the circle marker to the L.geoJson pointToLayer option
     return layer;
 };
 
 //Step 1: Create new sequence controls
-
-{
-    
+function createSequenceControls(map, attributes){
     //create range input element (slider)
     $('#panel').append('<input class="range-slider" type="range">');
+
     //set slider attributes
     $('.range-slider').attr({
-        max: 6,
-        min: 0,
-        value: 0,
-        step: 1
+      max: 6,
+      min: 0,
+      value: 0,
+      step: 1,
     })
+
     $('#panel').append('<button class="skip" id="reverse">Reverse</button>');
     $('#panel').append('<button class="skip" id="forward">Skip</button>');
-    $('#reverse').html('<img src="img/LtArrow25.jpg">');
-    $('#forward').html('<img src="img/RtArrow25.jpg">');
-        //Step 5: click listener for buttons
-    $('.skip').click(function(){
-        //sequence
-          //get the old index value
-        var index = $('.range-slider').val();
+    $('#reverse').html('<img src="img/LeftArrow.png">');
+    $('#forward').html('<img src="img/RightArrrow.png">');
 
-        //Step 6: increment or decrement depending on button clicked
-        if ($(this).attr('id') == 'forward'){
-            index++;
-            //Step 7: if past the last attribute, wrap around to first attribute
-            index = index > 6 ? 0 : index;
-        } else if ($(this).attr('id') == 'reverse'){
-            index--;
-            //Step 7: if past the first attribute, wrap around to last attribute
-            index = index < 0 ? 6 : index;
-        };
+    //Step 5: click listener for buttons
+    $('.skip').click(function(){
+      //get the old index value
+      var index = $('.range-slider').val();
+
+      //Step 6: increment or decrement depending on button clicked
+      if ($(this).attr('id') == 'forward'){
+           index++;
+           //Step 7: if past the last attribute, wrap around to first attribute
+           index = index > 6 ? 0 : index;
+      } else if ($(this).attr('id') == 'reverse'){
+           index--;
+           //Step 7: if past the first attribute, wrap around to last attribute
+           index = index < 0 ? 6 : index;
+         };
+      //Step 8: update slider
+      $('.range-slider').val(index);
+
+      //Step 9: pass new attribute to update symbols
+      updatePropSymbols(map, attributes[index]);
     });
-      //Step 5: input listener for slider
+
+    //Step 5: input listener for slider
     $('.range-slider').on('input', function(){
-        //sequence
         //Step 6: get the new index value
         var index = $(this).val();
-        //passes new attributes to updated symbols..
+
         updatePropSymbols(map, attributes[index]);
     });
 };
@@ -191,68 +198,111 @@ function updatePropSymbols(map, attribute){
             layer.setRadius(radius);
 
             //add city to popup content string
-            var popupContent = "<p><b>City:</b> " + props.City + "</p>";
+            var popupContent = "<p><b>Park Name:</b> " + props.ParkName + "</p>";
 
             //add formatted attribute to panel content string
             var year = attribute.split("_")[1];
-            popupContent += "<p><b>Population in " + year + ":</b> " + props[attribute] + " million</p>";
+            popupContent += "<p><b>Number of visitors in " + year + ":</b> " + props[attribute] + "20</p>";
 
             //replace the layer popup
             layer.bindPopup(popupContent, {
                 offset: new L.Point(0,-radius)
-            });
+            })
         };
     });
 };
  
+ 
+// function addAverage(response, map) {
+//   var avMarkerOptions={
+//     radius: 4,
+//     fillColor: #ffffff,
+//     color: #00e600,
+//     buffer: 2.5,
+//     weight: 1.5
+//     opacity: 1,
+//     fillOpacity:1
+//     };
 
- //FIFTH INTERACTION OPERATOR: MAKES A TOGGEL BUTTON THAT TURNS ON AVERAGES FOR THE DATA PER PARK #Overlay
- //Might add another operator that draws lines and displays distances if possible. still looking into this. Would be
- //geared towards visitors finding or mapping with potenial trail routes. #Calculate
-function togglePoints(){
-        //loads my data
-        $.ajax("data/NationalParksAverage.geojson", {
-        dataType: "json",
-        success: function(response){
-            //call function to create proportional symbols
-           createPropSymbolsAverage(response, map, attributes);
+//   L.geoJson(response, {
+//     //convert point to layer, add pop ups, interactivty with overlayButton
+//     pointToLayer: function(feature, latlng) {
+//       //define layer and popupContent
+//       var layer2 = L.circleMarker(latlng, avMarkerOptions)
+//       var popupContent="<p><b>Park Name: </b>"+feature.properties.ParkName+"</p>"
+//       popupContent+="<p><b>Year: </b>"+feature.properties.20+"</p>"
+//       //add functionality to button to add/remove layer2
+//       $('#buttonOverlay').click(function(){
+//       if (map.hasLayer(layer2)){
+//           map.removeLayer(layer2);
+//       } else {
+//         map.addLayer(layer2);
+//       }
+//     });
+//     //bind popup content to layer2
+//       layer2.bindPopup(popupContent);
+//       layer2.on({
+//     //provide functionality for mouseover and mouseout
+//           mouseover: function(){
+//             this.openPopup();
+//         },
+//           mouseout: function(){
+//             this.closePopup();
+//           }
+//         });
+//         return layer2;
+//       }
+//   }).addTo(map);
+// };
+
+
+//  //FIFTH INTERACTION OPERATOR: MAKES A TOGGEL BUTTON THAT TURNS ON AVERAGES FOR THE DATA PER PARK #Overlay
+//  //Might add another operator that draws lines and displays distances if possible. still looking into this. Would be
+//  //geared towards visitors finding or mapping with potenial trail routes. #Calculate
+// function togglePoints(){
+//         //loads my data
+//         $.ajax("data/NationalParksAverage.geojson", {
+//         dataType: "json",
+//         success: function(response){
+//             //call function to create proportional symbols
+//            createPropSymbolsAverage(response, map, attributes);
         
-        }
-        click: function(){
-            $("#control").html(popupContentAverage);
-        }
-    }
-}
-// creates the prop symbl for the average 
-function createPropSymbolsAverage(data, map){
-    //create a Leaflet GeoJSON layer and add it to the map for average
-    L.geoJson(data, {
-         pointToLayerAverage: function(feature, latlng){
-            return pointToLayerAverage(feature, latlng, attributes);
-        }    
-    }).addTo(map);
-};
+//         }
+//         click: function(){
+//             $("#control").html(popupContentAverage);
+//         }
+//     }
+// }
+// // creates the prop symbl for the average 
+// function createPropSymbolsAverage(data, map){
+//     //create a Leaflet GeoJSON layer and add it to the map for average
+//     L.geoJson(data, {
+//          pointToLayerAverage: function(feature, latlng){
+//             return pointToLayerAverage(feature, latlng, attributes);
+//         }    
+//     }).addTo(map);
+// };
 
-//similar to the pointToLayer above, but more simple.
-function pointToLayerAverage(feature, latlng, attributes){
-     //Step 4: Assign the current attribute based on the first index of the attributes array
-    var attribute = "ParkName";
-    //create marker options
-    var options = {
-        fillColor: "#ffffff",
-        color: "#00cc00",
-        weight: 1.5,
-        opacity: 1,
-        fillOpacity: 0.0
-    };
-    //create circle marker layer
-    var layer = L.circleMarker(latlng, options);
-    var popupContentAverage = feature.properties.ParkName;
-     var attValue = Number(feature.properties.ParkName);
-    //Give each feature's circle marker a radius based on its attribute value
-    options.radius = calcPropRadius(attValue);
-    return layer;
-};
+// //similar to the pointToLayer above, but more simple.
+// function pointToLayerAverage(feature, latlng, attributes){
+//      //Step 4: Assign the current attribute based on the first index of the attributes array
+//     var attribute = "ParkName";
+//     //create marker options
+//     var options = {
+//         fillColor: "#ffffff",
+//         color: "#00cc00",
+//         weight: 1.5,
+//         opacity: 1,
+//         fillOpacity: 0.0
+//     };
+//     //create circle marker layer
+//     var layer = L.circleMarker(latlng, options);
+//     var popupContentAverage = feature.properties.ParkName;
+//      var attValue = Number(feature.properties.ParkName);
+//     //Give each feature's circle marker a radius based on its attribute value
+//     options.radius = calcPropRadius(attValue);
+//     return layer;
+// };
 
 
 
