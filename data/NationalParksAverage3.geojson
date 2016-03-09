@@ -1,0 +1,719 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Acadia",
+        "Y_Average": "2,452,405"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.2167,
+          44.35
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Arches",
+        "Y_Average": "1,126,990"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.5667,
+          38.6833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Badlands",
+        "Y_Average": "916,523"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.5,
+          43.75
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Big Bend",
+        "Y_Average": "343,279"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.25,
+          59.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Biscayne",
+        "Y_Average": "485,401"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.1861,
+          25.4694
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Black Canyon of the Gunnison",
+        "Y_Average": "182,395"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.7167,
+          38.5667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Bryce Canyon",
+        "Y_Average": "1,382,377"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.1677,
+          37.6283
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Canyonlands",
+        "Y_Average": "491,165"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.7597,
+          38.1669
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Capitol Reef",
+        "Y_Average": "716,180"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.1667,
+          38.2
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Carlsbad Caverns",
+        "Y_Average": "405,545"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.4439,
+          32.1753
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Channel Islands",
+        "Y_Average": "285,374"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.4167,
+          34.0083
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Congaree",
+        "Y_Average": "114,572"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.7833,
+          33.7833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Crater Lake",
+        "Y_Average": "491,269"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1481,
+          42.9118
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Cuyahoga Valley",
+        "Y_Average": "2,302,905"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.5497,
+          41.2417
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Death Valley",
+        "Y_Average": "993,273"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.8258,
+          36.2419
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Dry Tortugas",
+        "Y_Average": "62,250"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.8733,
+          24.6286
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Everglades",
+        "Y_Average": "1,018,303"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.9333,
+          25.3167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Glacier",
+        "Y_Average": "2,163,136"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.7183,
+          48.6967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Grand Canyon",
+        "Y_Average": "4,614,047"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.1218,
+          36.0553
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Grand Teton",
+        "Y_Average": "2,738,894"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.7008,
+          43.8333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Great Basin",
+        "Y_Average": "96,670"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.2197,
+          39.0058
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Great Smoky Mountains ",
+        "Y_Average": "9,688,040"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.5333,
+          35.6833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Guadalupe Mountains",
+        "Y_Average": "169,296"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.8667,
+          31.9167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Haleakala",
+        "Y_Average": "1,058,640"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -156.1667,
+          20.7167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Hawaii Volcanoes",
+        "Y_Average": "1,497,528"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.2,
+          19.3833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Hot Springs",
+        "Y_Average": "1,351,963"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.0536,
+          34.5136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Isle Royale",
+        "Y_Average": "16,074"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.55,
+          48.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Joshua Tree",
+        "Y_Average": "1,504,400"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115.8982,
+          33.7884
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Kenai Fjords",
+        "Y_Average": "284,993"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.9875,
+          59.9178
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Kings Canyon",
+        "Y_Average": "557,609"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.6729,
+          36.7893
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Kobuk Valley",
+        "Y_Average": "8,993"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -159.2833,
+          67.55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Lassen Volcanic",
+        "Y_Average": "405,373"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.505,
+          40.4877
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Mammoth Cave",
+        "Y_Average": "510,931"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.1,
+          37.1833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Mesa Verde",
+        "Y_Average": "525,772"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -108.4887,
+          37.1838
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Mount Rainier",
+        "Y_Average": "1,154,408"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.7604,
+          46.8529
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "North Cascades",
+        "Y_Average": "23,420"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.3475,
+          48.8328
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Olympic",
+        "Y_Average": "3,072,201"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.4986,
+          47.9694
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Petrified Forest",
+        "Y_Average": "692,846"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.8064,
+          35.0881
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Pinnacles",
+        "Y_Average": "239,461"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.1669,
+          36.4869
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Redwood",
+        "Y_Average": "420,800"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124,
+          41.3
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Rocky Mountain",
+        "Y_Average": "3,252,359"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.7089,
+          40.3333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Saguaro",
+        "Y_Average": "676,065"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.5,
+          32.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Sequoia",
+        "Y_Average": "1,018,170"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.5044,
+          36.04
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Shenandoah",
+        "Y_Average": "1,215,450"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.35,
+          38.5333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Theodore Roosevelt",
+        "Y_Average": "585,620"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.45,
+          46.9667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Virgin Islands",
+        "Y_Average": "448,426"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.7333,
+          18.3333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Voyageurs",
+        "Y_Average": "225,601"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.8833,
+          48.5
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Wind Cave",
+        "Y_Average": "558,264"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.4786,
+          43.5564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Yellowstone",
+        "Y_Average": "3,510,950"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.5,
+          44.6
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Yosemite",
+        "Y_Average": "3,881,104"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.5677,
+          37.8499
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ParkName": "Zion",
+        "Y_Average": "2,978,059"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.9878,
+          37.2026
+        ]
+      }
+    }
+  ]
+}

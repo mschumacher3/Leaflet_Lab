@@ -25,7 +25,7 @@ function createMap(){
 //calculate the radius of each proportional symbols
 function calcPropRadius(attValue) {
     //scale factor to adjust symbol size evenly
-    var scaleFactor = .0006;
+    var scaleFactor = .0004;
     //area based on attribute value and scale factor
     var area = attValue * scaleFactor;
     //radius calculated based on area
@@ -50,7 +50,7 @@ function getData(map){
 
     });
         //adds 5th operator data to map
-        $.ajax("data/NationalParksAverage.geojson",{
+        $.ajax("data/NationalParksAverage3.geojson",{
             dataType: "json",
             success: function(response){
                 addAverage(response,map);
@@ -143,7 +143,6 @@ function createSequenceControls(map, attributes){
             var container = L.DomUtil.create('div', 'sequence-control-container');
 
              //create range input element (slider)
-             //GOG FORSAKEN UGLY ARROWS ARE NOT SHOWING
             $(container).append('<input class="range-slider" type="range">');
             $(container).append('<button class="skip" id="reverse">Reverse</button>');
             $(container).append('<button class="skip" id="forward">Skip</button>');
@@ -214,7 +213,7 @@ function updatePropSymbols(map, attribute){
 
             //add formatted attribute to panel content string
             var year = attribute.split("_")[1];
-            popupContent += "<p><b>Number of visitors in " + attribute + ":</b> " + props[attribute] + "</p>";
+            popupContent += "<p><b>Number of visitors in " + year + ":</b> " + props[attribute] + "</p>";
 
             //replace the layer popup
             layer.bindPopup(popupContent, {
@@ -224,9 +223,51 @@ function updatePropSymbols(map, attribute){
     });
 };
  
+// //FIFTH OPERATOR THAT IMPLEMENTS THE OVERLAY TO SHOW THE AVERAGES FOR EACH PARK 
+// function addAverage(response, map) {
+//   var avMarkerOptions={
+//     radius: 5,
+//     fillColor: #ffffff,
+//     color: #0066ff,
+//     buffer: 3,
+//     weight: 0.6,
+//     opacity: 1,
+//     fillOpacity:0
+//     };
 
+//   L.geoJson(response, {
+//     //convert point to layer, add pop ups, interactivty with overlayButton
+//     pointToLayer: function(feature, latlng) {
+//       //define layer and popupContent
+//       var layer2 = L.circleMarker(latlng, avMarkerOptions)
+//       var popupContent = "<p><b>Park Name:</b> " + props.ParkName + "</p>";
+//       var year = attribute.split("_")[1];
+//       popupContent += "<p><b>Number of visitors in " + year + ":</b> " + props[attribute] + "</p>";
+//       //add functionality to button to add/remove layer2
+//       $('#overlayButton').click(function(){
+//       if (map.hasLayer(layer2)){
+//           map.removeLayer(layer2);
+//       } else {
+//         map.addLayer(layer2);
+//       }
+//     });
+//     //bind popup content to layer2
+//       layer2.bindPopup(popupContent);
+//       layer2.on({
+//     //provide functionality for mouseover and mouseout
+//           mouseover: function(){
+//             this.openPopup();
+//         },
+//           mouseout: function(){
+//             this.closePopup();
+//           }
+//         });
+//         return layer2;
+//       }
+//   }).addTo(map);
+// };
 
-
+// ///end of attempting fifth operator
 
 
 function createLegend(map, attributes){
@@ -248,17 +289,17 @@ function createLegend(map, attributes){
             //object to base loop on
             var circles = {
                 max: 20,
-                mean: 40,
-                min: 60
+                mean: 45,
+                min: 70
             };
 
             //loop to add each circle and text to svg string
             for (var circle in circles){
                 //circle string
-                svg += '<circle class="legend-circle" id="' + circle + '" fill="#ffffff" fill-opacity="0" stroke="#000000" cx="30"/>';
+                svg += '<circle class="legend-circle" id="' + circle + '" fill="#ffffff" fill-opacity="0" stroke="#000000" cx="50"/>';
 
                 //text string
-                svg += '<text id="' + circle + '-text" x="80" y="' + circles[circle] + '"></text>';
+                svg += '<text id="' + circle + '-text" x="100" y="' + circles[circle] + '"></text>';
             };
 
 
@@ -294,7 +335,7 @@ function updateLegend(map, attribute){
         var radius = calcPropRadius(circleValues[key]);
 
         $('#'+key).attr({
-            cy: 59 - radius,
+            cy: 80 - radius,
             r: radius
         });
 
@@ -326,7 +367,7 @@ function getCircleValues(map, attribute){
         };
     });
 
-    //set mean
+    //sets mean
     var mean = (max + min) / 2;
     
     //return values as an object
@@ -336,8 +377,6 @@ function getCircleValues(map, attribute){
         min: min
     };
 };
-
-
 
 $(document).ready(createMap);
 
