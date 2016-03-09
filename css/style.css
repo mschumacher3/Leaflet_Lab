@@ -13,24 +13,25 @@ body{
     display: inline-block;
 }
 
-#panel {
-    width: 16%;
+.panel {
+    width: 25%;
     padding: 20px;
     display: inline-block;
     vertical-align: top;
-    color: #7a7a52
 }
-#panel {
+
+/*#panel {
     width: 26%;
     padding: 20px;
     display: inline-block;
     vertical-align: top;
     text-align: center;
     line-height: 42px;
-}
+}*/
 #control {
-    width: 26%;
+    width: 22%;
     padding: 20px;
+    float:right;
     display: inline-block;
     vertical-align: top;
     text-align: center;

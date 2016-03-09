@@ -20,6 +20,7 @@ function createMap(){
         maxZoom: 8
     }).addTo(map);
     getData(map);
+    addAverage(map);
 };
 
 //calculate the radius of each proportional symbols
@@ -50,12 +51,13 @@ function getData(map){
 
     });
         //adds 5th operator data to map
-        $.ajax("data/NationalParksAverage3.geojson",{
-            dataType: "json",
-            success: function(response){
-                addAverage(response,map);
-            }
-        })
+        // $.ajax("data/NationalParksAverage3.geojson",{
+        //     dataType: "json",
+        //     success: function(response){
+        //         
+        // (response,map);
+        //     }
+        // })
 };
 
 function processData(data){
@@ -225,10 +227,11 @@ function updatePropSymbols(map, attribute){
  
 // //FIFTH OPERATOR THAT IMPLEMENTS THE OVERLAY TO SHOW THE AVERAGES FOR EACH PARK 
 // function addAverage(response, map) {
+//     var type = attributes[0];
 //   var avMarkerOptions={
 //     radius: 5,
-//     fillColor: #ffffff,
-//     color: #0066ff,
+//     fillColor: "#fff",
+//     color: "#0066ff",
 //     buffer: 3,
 //     weight: 0.6,
 //     opacity: 1,
@@ -236,25 +239,24 @@ function updatePropSymbols(map, attribute){
 //     };
 
 //   L.geoJson(response, {
-//     //convert point to layer, add pop ups, interactivty with overlayButton
 //     pointToLayer: function(feature, latlng) {
 //       //define layer and popupContent
 //       var layer2 = L.circleMarker(latlng, avMarkerOptions)
-//       var popupContent = "<p><b>Park Name:</b> " + props.ParkName + "</p>";
-//       var year = attribute.split("_")[1];
-//       popupContent += "<p><b>Number of visitors in " + year + ":</b> " + props[attribute] + "</p>";
-//       //add functionality to button to add/remove layer2
-//       $('#overlayButton').click(function(){
+//       var popupContent = "<p><b>Park Name:</b> " + feature.ParkName + "</p>";
+//       var year = type.split("_")[1];
+//       popupContent += "<p><b>Number of visitors in " + year + ":</b> " + feature[type] + "</p>";
+//       //adds and removes layer2
+//       $('#buttonOverlay').click(function(){
 //       if (map.hasLayer(layer2)){
 //           map.removeLayer(layer2);
 //       } else {
 //         map.addLayer(layer2);
 //       }
 //     });
-//     //bind popup content to layer2
+//     //adds popup
 //       layer2.bindPopup(popupContent);
 //       layer2.on({
-//     //provide functionality for mouseover and mouseout
+//     //provides functionality for mouseover and mouseout
 //           mouseover: function(){
 //             this.openPopup();
 //         },
@@ -267,7 +269,59 @@ function updatePropSymbols(map, attribute){
 //   }).addTo(map);
 // };
 
-// ///end of attempting fifth operator
+function addAverage(map) {
+    $.ajax("data/NationalParksAverage3.geojson", {
+        dataType: "json",
+        success: function (response) {
+
+            //marker style options are set to a variable
+            var geojsonMarkerOptions = {
+                radius: 10,
+                fillOpacity: 0,
+                color: "#000",
+                weight: 2,
+                opacity: 0.4,
+            };
+
+            //geoJSON layer with leaflet is created to add data to the map
+            var overlayLayer = L.geoJson(response, {
+            
+
+                //pointToLayer is used to change the marker features to circle markers, 
+                //styled with geojsonMarkerOptions
+                pointToLayer: function (feature, latlng) {
+
+                    
+                    return L.circleMarker (latlng, geojsonMarkerOptions);
+                        }
+                });
+            
+            
+            //function to size the overlay data according to max rainfall
+            overlayLayer.eachLayer(function(layer){
+
+            //max rainfall property is set to props
+            var props = layer.feature.properties.Y_Average;
+            
+            //the radius is calculated using the calcPropSymbols function
+            var radius = calcPropRadius(props);
+
+            //the radius is set to the data layer
+            layer.setRadius(radius);
+            });
+        
+            //leaflet overlay control to add the overlay data
+            var overlayRings = {
+            "<span class = 'overlayText'>Maximum Rainfall in a 3 Hour Period</span>": overlayLayer
+            };
+
+            //adding the control to the map
+            L.control.layers(null, overlayRings).addTo(map);    
+        }
+
+    });
+};
+//end of attempting fifth operator
 
 
 function createLegend(map, attributes){
