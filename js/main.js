@@ -226,100 +226,47 @@ function updatePropSymbols(map, attribute){
 };
  
 // //FIFTH OPERATOR THAT IMPLEMENTS THE OVERLAY TO SHOW THE AVERAGES FOR EACH PARK 
-// function addAverage(response, map) {
-//     var type = attributes[0];
-//   var avMarkerOptions={
-//     radius: 5,
-//     fillColor: "#fff",
-//     color: "#0066ff",
-//     buffer: 3,
-//     weight: 0.6,
-//     opacity: 1,
-//     fillOpacity:0
-//     };
+function addAverage(response, map) {
+    var type = attributes[0];
+  var avMarkerOptions={
+    radius: 5,
+    fillColor: "#fff",
+    color: "#0066ff",
+    buffer: 3,
+    weight: 0.6,
+    opacity: 1,
+    fillOpacity:0
+    };
 
-//   L.geoJson(response, {
-//     pointToLayer: function(feature, latlng) {
-//       //define layer and popupContent
-//       var layer2 = L.circleMarker(latlng, avMarkerOptions)
-//       var popupContent = "<p><b>Park Name:</b> " + feature.ParkName + "</p>";
-//       var year = type.split("_")[1];
-//       popupContent += "<p><b>Number of visitors in " + year + ":</b> " + feature[type] + "</p>";
-//       //adds and removes layer2
-//       $('#buttonOverlay').click(function(){
-//       if (map.hasLayer(layer2)){
-//           map.removeLayer(layer2);
-//       } else {
-//         map.addLayer(layer2);
-//       }
-//     });
-//     //adds popup
-//       layer2.bindPopup(popupContent);
-//       layer2.on({
-//     //provides functionality for mouseover and mouseout
-//           mouseover: function(){
-//             this.openPopup();
-//         },
-//           mouseout: function(){
-//             this.closePopup();
-//           }
-//         });
-//         return layer2;
-//       }
-//   }).addTo(map);
-// };
-
-function addAverage(map) {
-    $.ajax("data/NationalParksAverage3.geojson", {
-        dataType: "json",
-        success: function (response) {
-
-            //marker style options are set to a variable
-            var geojsonMarkerOptions = {
-                radius: 10,
-                fillOpacity: 0,
-                color: "#000",
-                weight: 2,
-                opacity: 0.4,
-            };
-
-            //geoJSON layer with leaflet is created to add data to the map
-            var overlayLayer = L.geoJson(response, {
-            
-
-                //pointToLayer is used to change the marker features to circle markers, 
-                //styled with geojsonMarkerOptions
-                pointToLayer: function (feature, latlng) {
-
-                    
-                    return L.circleMarker (latlng, geojsonMarkerOptions);
-                        }
-                });
-            
-            
-            //function to size the overlay data according to max rainfall
-            overlayLayer.eachLayer(function(layer){
-
-            //max rainfall property is set to props
-            var props = layer.feature.properties.Y_Average;
-            
-            //the radius is calculated using the calcPropSymbols function
-            var radius = calcPropRadius(props);
-
-            //the radius is set to the data layer
-            layer.setRadius(radius);
-            });
-        
-            //leaflet overlay control to add the overlay data
-            var overlayRings = {
-            "<span class = 'overlayText'>Maximum Rainfall in a 3 Hour Period</span>": overlayLayer
-            };
-
-            //adding the control to the map
-            L.control.layers(null, overlayRings).addTo(map);    
-        }
-
+  L.geoJson(response, {
+    pointToLayer: function(feature, latlng) {
+      //define layer and popupContent
+      var layer2 = L.circleMarker(latlng, avMarkerOptions)
+      var popupContent = "<p><b>Park Name:</b> " + feature.ParkName + "</p>";
+      var year = type.split("_")[1];
+      popupContent += "<p><b>Number of visitors in " + year + ":</b> " + feature[type] + "</p>";
+      //adds and removes layer2
+      $('#buttonOverlay').click(function(){
+      if (map.hasLayer(layer2)){
+          map.removeLayer(layer2);
+      } else {
+        map.addLayer(layer2);
+      }
     });
+    //adds popup
+      layer2.bindPopup(popupContent);
+      layer2.on({
+    //provides functionality for mouseover and mouseout
+          mouseover: function(){
+            this.openPopup();
+        },
+          mouseout: function(){
+            this.closePopup();
+          }
+        });
+        return layer2;
+      }
+  }).addTo(map);
 };
 //end of attempting fifth operator
 
