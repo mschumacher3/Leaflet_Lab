@@ -45,9 +45,17 @@ function getData(map){
             //call function to create proportional symbols, then sequence controls
            createPropSymbols(response, map, attributes);
            createSequenceControls(map, attributes);
+           createLegend(map, attributes);
         }
 
     });
+        //adds 5th operator data to map
+        $.ajax("data/NationalParksAverage.geojson",{
+            dataType: "json",
+            success: function(response){
+                addAverage(response,map);
+            }
+        })
 };
 
 function processData(data){
@@ -119,9 +127,6 @@ function pointToLayer(feature, latlng, attributes){
         mouseout: function(){
             this.closePopup();
         },
-        // click: function(){
-        //  $("#panel").html(popupContent);
-        // }
     });
     //return the circle marker to the L.geoJson pointToLayer option
     return layer;
@@ -142,10 +147,7 @@ function createSequenceControls(map, attributes){
             $(container).append('<input class="range-slider" type="range">');
             $(container).append('<button class="skip" id="reverse">Reverse</button>');
             $(container).append('<button class="skip" id="forward">Skip</button>');
-            $('#reverse').html('<img src="img/LeftArrow.png">');
-            $('#forward').html('<img src="img/RightArrrow.png">');
-
-
+          
               //kill any mouse event listeners on the map
             $(container).on('mousedown dblclick', function(e){
                 L.DomEvent.stopPropagation(e);
@@ -163,7 +165,8 @@ function createSequenceControls(map, attributes){
       value: 0,
       step: 1,
     })
-
+      $('#reverse').html('<img src="img/LeftArrow.png">');
+      $('#forward').html('<img src="img/RightArrrow.png">');
     //Step 5: click listener for buttons
     $('.skip').click(function(){
       //get the old index value
@@ -172,18 +175,17 @@ function createSequenceControls(map, attributes){
       //Step 6: increment or decrement depending on button clicked
       if ($(this).attr('id') == 'forward'){
            index++;
-           //Step 7: if past the last attribute, wrap around to first attribute
            index = index > 6 ? 0 : index;
       } else if ($(this).attr('id') == 'reverse'){
            index--;
-           //Step 7: if past the first attribute, wrap around to last attribute
            index = index < 0 ? 6 : index;
          };
-      //Step 8: update slider
+      // update slider
       $('.range-slider').val(index);
 
       //Step 9: pass new attribute to update symbols
       updatePropSymbols(map, attributes[index]);
+      updateLegend(map,attributes[index]);
     });
 
     //Step 5: input listener for slider
@@ -192,6 +194,7 @@ function createSequenceControls(map, attributes){
         var index = $(this).val();
 
         updatePropSymbols(map, attributes[index]);
+        updateLegend(map, attributes[index]);
     });
 };
 
@@ -221,72 +224,7 @@ function updatePropSymbols(map, attribute){
     });
 };
  
- function updateLegend(map, attribute){
-    //create content for legend
-    var year = attribute.split("_")[1];
-    var content = "Number of Visitors in " + year;
 
-    //replace legend content
-    $('#temporal-legend').html(content);
-
-    //get the max, mean, and min values as an object
-    var circleValues = getCircleValues(map, attribute);
-
-    for (var key in circleValues){
-        //get the radius
-        var radius = calcPropRadius(circleValues[key]);
-
-        $('#'+key).attr({
-            cy: 59 - radius,
-            r: radius
-        });
-
-        $('#'+key+'-text').text(Math.round(circleValues[key]*100)/100 + " ");
-    };
-};
-
-//FIFTH INTERACTION OPERATOR: MAKES A TOGGEL BUTTON THAT TURNS ON AVERAGES FOR THE DATA PER PARK #Overlay
-// function addAverage(response, map) {
-//   var avMarkerOptions={
-//     radius: 4,
-//     fillColor: #ffffff,
-//     color: #00e600,
-//     buffer: 2.5,
-//     weight: 1.5
-//     opacity: 1,
-//     fillOpacity:1
-//     };
-
-//   L.geoJson(response, {
-//     //convert point to layer, add pop ups, interactivty with overlayButton
-//     pointToLayer: function(feature, latlng) {
-//       //define layer and popupContent
-//       var layer2 = L.circleMarker(latlng, avMarkerOptions)
-//       var popupContent="<p><b>Park Name: </b>"+feature.properties.ParkName+"</p>"
-//       // popupContent+="<p><b>Year: </b>"+feature.properties.20+"</p>"
-//       //add functionality to button to add/remove layer2
-//       $('#buttonOverlay').click(function(){
-//       if (map.hasLayer(layer2)){
-//           map.removeLayer(layer2);
-//       } else {
-//         map.addLayer(layer2);
-//       }
-//     });
-//     //bind popup content to layer2
-//       layer2.bindPopup(popupContent);
-//       layer2.on({
-//     //provide functionality for mouseover and mouseout
-//           mouseover: function(){
-//             this.openPopup();
-//         },
-//           mouseout: function(){
-//             this.closePopup();
-//           }
-//         });
-//         return layer2;
-//       }
-//   }).addTo(map);
-// };
 
 
 
@@ -317,21 +255,12 @@ function createLegend(map, attributes){
             //loop to add each circle and text to svg string
             for (var circle in circles){
                 //circle string
-                svg += '<circle class="legend-circle" id="' + circle + '" fill="#F47821" fill-opacity="0.8" stroke="#000000" cx="30"/>';
+                svg += '<circle class="legend-circle" id="' + circle + '" fill="#ffffff" fill-opacity="0" stroke="#000000" cx="30"/>';
 
                 //text string
-                svg += '<text id="' + circle + '-text" x="65" y="' + circles[circle] + '"></text>';
+                svg += '<text id="' + circle + '-text" x="80" y="' + circles[circle] + '"></text>';
             };
 
-            // //array of circle names to base loop on
-            // var circles = ["max", "mean", "min"];
-
-            // //loop to add each circle and text to svg string
-            // for (var i=0; i<circles.length; i++){
-            //  //circle string
-            //  svg += '<circle class="legend-circle" id="' + circles[i] + 
-            //  '" fill="#F47821" fill-opacity="0.8" stroke="#000000" cx="30"/>';
-            // };
 
             //close svg string
             svg += "</svg>";
@@ -344,12 +273,12 @@ function createLegend(map, attributes){
     });
 
     map.addControl(new LegendControl());
-
     updateLegend(map, attributes[0]);
 };
 
-
+//updates the legend with the new attribute
 function updateLegend(map, attribute){
+    //var year = attribute[2];
     //create content for legend
     var year = attribute.split("_")[1];
     var content = "Visitors in " + year;
@@ -369,7 +298,7 @@ function updateLegend(map, attribute){
             r: radius
         });
 
-        $('#'+key+'-text').text(Math.round(circleValues[key]*100)/100 + " people");
+        $('#'+key+'-text').text(Math.round(circleValues[key]*100)/100 + " ");
     };
 };
 
