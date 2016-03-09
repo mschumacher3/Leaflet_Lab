@@ -320,7 +320,6 @@ function createLegend(map, attributes){
 
 //updates the legend with the new attribute
 function updateLegend(map, attribute){
-    //var year = attribute[2];
     //create content for legend
     var year = attribute.split("_")[1];
     var content = "Visitors in " + year;

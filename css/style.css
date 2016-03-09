@@ -2,7 +2,12 @@
 body{
     background-color:#F6F0DF;
 }
-
+h1{
+  font-size: 28pt;
+}
+h2{
+  font-size: 20pt;
+}
 .leaflet-popup-content p {
     margin: 0.2em 0;
 }
@@ -13,21 +18,13 @@ body{
     display: inline-block;
 }
 
-.panel {
+#panel {
     width: 25%;
     padding: 20px;
     display: inline-block;
     vertical-align: top;
 }
 
-/*#panel {
-    width: 26%;
-    padding: 20px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-    line-height: 42px;
-}*/
 #control {
     width: 22%;
     padding: 20px;
@@ -52,9 +49,11 @@ body{
 
 .range-slider {
     width: 200px;
+
 }
 
 #forward {
+    vertical-align: center;
     float: right;
     padding: 2px;
     opacity: 1;
@@ -62,10 +61,14 @@ body{
 
 #reverse {
     float: left;
+    padding: 2px;
+    opacity: 1;
+    vertical-align: center;
 }
 #description{
     text-align: left;
-    padding: 15px;
+    padding: 2px;
+    text-align: center;
     background-color: #5A712D;
 }
 #buttonOverlay{
@@ -85,6 +88,15 @@ body{
     background-color: #000000;
 }
 
+#temporal-legend{
+  width: 200px;
+  height: 12px;
+  padding:2px;
+  position: relative;
+  background-color: #ffffff;
+  opacity: 0.5;
+  border: gray;
+}
 
 #attribute-legend{
   width: 200px;
